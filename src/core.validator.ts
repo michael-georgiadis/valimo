@@ -1,14 +1,11 @@
-import { IValidator } from "./validator.interface";
-import { ValidatorGenerator } from "./validator.generator";
 import { GenericRule } from "./rules/generic.rule";
 import { CoreRule } from "./rules/core.rule";
 import { CoreValidatorBuilder } from "./core.validator-builder";
-// import { ValueOf } from "./types/valueOf.type";
-
+import { IValidationError } from "./errors/validation.error"
 
 
 export abstract class CoreValidator<T> {
-    public rules: {[property: string]: CoreRule<T>[]}= {};
+    public rules: { [property: string]: CoreRule<T>[] } = {};
 
     constructor() { }
 
@@ -23,21 +20,25 @@ export abstract class CoreValidator<T> {
     }
 
     public validate(object: T) {
-        let errorMessage = "";
-        const anyObject = object as any;
-        for (let key in this.rules) {
-            for (let rule of this.rules[key]) {
-                const result = rule.validate(anyObject[key], object);
-                if (result != null) {
-                    errorMessage += result + "\n";
-                }
+        let errors: IValidationError[] = []
+
+        for (let propertyName in this.rules) {
+            let errorMessagesForRule: string[] = [];
+
+            for (let rule of this.rules[propertyName]) {
+                const errorResult = rule.validate(object[propertyName as keyof T], object);
+
+                if (errorResult != null)
+                    errorMessagesForRule.push(errorResult);
             }
+
+            if (errorMessagesForRule !== [])
+                errors.push({
+                    property: propertyName,
+                    errors: errorMessagesForRule
+                })
         }
 
-        if (errorMessage !== "") {
-            return errorMessage;
-        } else {
-            return null;
-        }
+        return errors.length > 0 ? errors : null;
     }
 }

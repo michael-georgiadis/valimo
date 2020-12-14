@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CoreValidator = void 0;
 const core_validator_builder_1 = require("./core.validator-builder");
-// import { ValueOf } from "./types/valueOf.type";
 class CoreValidator {
     constructor() {
         this.rules = {};
@@ -15,22 +14,21 @@ class CoreValidator {
         return new core_validator_builder_1.CoreValidatorBuilder(this, propertyName);
     }
     validate(object) {
-        let errorMessage = "";
-        const anyObject = object;
-        for (let key in this.rules) {
-            for (let rule of this.rules[key]) {
-                const result = rule.validate(anyObject[key], object);
-                if (result != null) {
-                    errorMessage += result + "\n";
-                }
+        let errors = [];
+        for (let propertyName in this.rules) {
+            let errorMessagesForRule = [];
+            for (let rule of this.rules[propertyName]) {
+                const errorResult = rule.validate(object[propertyName], object);
+                if (errorResult != null)
+                    errorMessagesForRule.push(errorResult);
             }
+            if (errorMessagesForRule !== [])
+                errors.push({
+                    property: propertyName,
+                    errors: errorMessagesForRule
+                });
         }
-        if (errorMessage !== "") {
-            return errorMessage;
-        }
-        else {
-            return null;
-        }
+        return errors.length > 0 ? errors : null;
     }
 }
 exports.CoreValidator = CoreValidator;

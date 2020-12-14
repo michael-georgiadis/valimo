@@ -12,13 +12,14 @@ class PersonValidator extends CoreValidator<Person> {
 
         this.ruleFor(x => x.name)
             .isRequired()
+            .withMessage("It's empty")
             .isMinLengthOf(9)
             .withMessage("You're stupid");
     }
 };
 
 const person = <Person>{
-    name: "Michael",
+    name: null,
     age: 14
 }
 
