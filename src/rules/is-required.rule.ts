@@ -1,6 +1,6 @@
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
-export class NotNullRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class IsRequiredRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
 
     constructor() {
         super((value: TValue) => {

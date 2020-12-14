@@ -1,22 +1,22 @@
-import { GenericRule } from "./rules/generic.rule";
+import { AbstractRule } from "./rules/abstract.rule";
 import { CoreRule } from "./rules/core.rule";
-import { CoreValidatorBuilder } from "./core.validator-builder";
+import { ValidatorGenerator } from "./validator.generator";
 import { IValidationError } from "./errors/validation.error"
 
 
-export abstract class CoreValidator<T> {
+export abstract class AbstractValidator<T> {
     public rules: { [property: string]: CoreRule<T>[] } = {};
 
     constructor() { }
 
-    public ruleFor(propertyNameFunc: (subject: T) => any): CoreValidatorBuilder<T> {
+    public ruleFor(propertyNameFunc: (subject: T) => any): ValidatorGenerator<T> {
         const p = new Proxy({} as any, {
             get(target, prop) { return prop }
         });
 
         const propertyName: string = propertyNameFunc(p);
 
-        return new CoreValidatorBuilder<T>(this, propertyName);
+        return new ValidatorGenerator<T>(this, propertyName);
     }
 
     public validate(object: T)  {

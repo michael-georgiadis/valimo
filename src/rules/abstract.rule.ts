@@ -1,7 +1,7 @@
 import { CoreRule } from "./core.rule";
 import { GenericValidator } from "../validators/generic.validator";
 
-export abstract class GenericRule<TModel, TValue> extends CoreRule<TModel> {
+export abstract class AbstractRule<TModel, TValue> extends CoreRule<TModel> {
 
     constructor(private readonly valueValidator: GenericValidator<TValue>) {
         super();
