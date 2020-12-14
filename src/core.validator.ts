@@ -9,21 +9,21 @@ export abstract class CoreValidator<T> {
 
     constructor() { }
 
-    public ruleFor(f: (x: T) => any): CoreValidatorBuilder<T> {
+    public ruleFor(propertyNameFunc: (subject: T) => any): CoreValidatorBuilder<T> {
         const p = new Proxy({} as any, {
             get(target, prop) { return prop }
         });
 
-        const propertyName: string = f(p);
+        const propertyName: string = propertyNameFunc(p);
 
         return new CoreValidatorBuilder<T>(this, propertyName);
     }
 
-    public validate(object: T) {
-        let errors: IValidationError[] = []
+    public validate(object: T)  {
+        const errors: IValidationError[] = []
 
         for (let propertyName in this.rules) {
-            let errorMessagesForRule: string[] = [];
+            const errorMessagesForRule: string[] = [];
 
             for (let rule of this.rules[propertyName]) {
                 const errorResult = rule.validate(object[propertyName as keyof T], object);
@@ -39,6 +39,8 @@ export abstract class CoreValidator<T> {
                 })
         }
 
-        return errors.length > 0 ? errors : null;
+        return errors.length > 0 
+        ? errors 
+        : null;
     }
 }

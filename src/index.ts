@@ -13,7 +13,7 @@ class PersonValidator extends CoreValidator<Person> {
         this.ruleFor(x => x.name)
             .isRequired()
             .withMessage("It's empty")
-            .isMinLengthOf(9)
+            .hasMinLengthOf(9)
             .withMessage("You're stupid");
     }
 };

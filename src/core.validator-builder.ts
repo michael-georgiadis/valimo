@@ -15,7 +15,7 @@ export class CoreValidatorBuilder<T> {
         return this;
     }
 
-    public isMinLengthOf(characters: number) {
+    public hasMinLengthOf(characters: number) {
         this.validator.rules[this.propertyName]
             .push(new MinLengthRule(characters));
 
