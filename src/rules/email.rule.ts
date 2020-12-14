@@ -1,9 +1,9 @@
 import { StringError } from "../errors/string.error";
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
 const emailPattern = /^[a-zA-Z0-9.!#$%&’"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
 
-export class EmailRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class EmailRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
     constructor() {
         super((value: TValue) => {
             if (value == null)

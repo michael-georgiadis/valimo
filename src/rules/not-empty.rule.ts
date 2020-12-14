@@ -1,7 +1,7 @@
 import { StringError } from "../errors/string.error";
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
-export class NotEmptyRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class NotEmptyRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
     constructor() {
         super((value: TValue) => {
             if (value == null)

@@ -1,7 +1,7 @@
 import { NumberError } from "../errors/number.error";
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
-export class InclusiveBetweenRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class InclusiveBetweenRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
     constructor(lowerBound: number, upperBound: number) {
         super((value: TValue) => {
             if (value == null)

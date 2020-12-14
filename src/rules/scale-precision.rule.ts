@@ -1,7 +1,7 @@
 import { NumberError } from "../errors/number.error";
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
-export class ScalePrecisionRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class ScalePrecisionRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
     constructor(precision: number, scale: number) {
         super((value: TValue) => {
             if (value == null)

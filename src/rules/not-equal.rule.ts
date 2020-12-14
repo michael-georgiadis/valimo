@@ -1,6 +1,6 @@
-import { GenericRule } from "./generic.rule";
+import { AbstractRule } from "./abstract.rule";
 
-export class NotEqualRule<TModel, TValue> extends GenericRule<TModel, TValue> {
+export class NotEqualRule<TModel, TValue> extends AbstractRule<TModel, TValue> {
     constructor(forbiddenValue: TValue) {
         super((value: TValue) => {
             if (value == null)
