@@ -5,14 +5,23 @@ const core_validator_1 = require("./core.validator");
 class PersonValidator extends core_validator_1.CoreValidator {
     constructor() {
         super();
-        this.ruleFor(x => x.name);
+        this.ruleFor(x => x.name)
+            .isRequired()
+            .isMinLengthOf(9)
+            .withMessage("You're stupid");
     }
 }
 ;
 const person = {
-    name: "",
+    name: "Michael",
     age: 14
 };
 const validator = new PersonValidator();
-console.log(validator.validate(person));
+const result = validator.validate(person);
+if (result == null) {
+    console.log(true);
+}
+else {
+    console.log(result);
+}
 //# sourceMappingURL=index.js.map

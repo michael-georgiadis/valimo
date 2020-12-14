@@ -1,32 +1,43 @@
 import { IValidator } from "./validator.interface";
 import { ValidatorGenerator } from "./validator.generator";
+import { GenericRule } from "./rules/generic.rule";
+import { CoreRule } from "./rules/core.rule";
+import { CoreValidatorBuilder } from "./core.validator-builder";
 // import { ValueOf } from "./types/valueOf.type";
 
 
 
 export abstract class CoreValidator<T> {
-    protected rules: string[] = [];
+    public rules: {[property: string]: CoreRule<T>[]}= {};
 
     constructor() { }
 
-    public ruleFor(f: (x: T) => any): any {
+    public ruleFor(f: (x: T) => any): CoreValidatorBuilder<T> {
         const p = new Proxy({} as any, {
             get(target, prop) { return prop }
         });
 
         const propertyName: string = f(p);
 
-        this.rules.push(propertyName);
+        return new CoreValidatorBuilder<T>(this, propertyName);
     }
 
     public validate(object: T) {
+        let errorMessage = "";
         const anyObject = object as any;
-        console.log(anyObject);
-        for(let rule of this.rules) {
-            if(anyObject[rule] === '') {
-                return false;
+        for (let key in this.rules) {
+            for (let rule of this.rules[key]) {
+                const result = rule.validate(anyObject[key], object);
+                if (result != null) {
+                    errorMessage += result + "\n";
+                }
             }
         }
-        return true;
+
+        if (errorMessage !== "") {
+            return errorMessage;
+        } else {
+            return null;
+        }
     }
 }

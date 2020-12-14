@@ -1,0 +1,1 @@
+{"version":3,"file":"null.rule.js","sourceRoot":"","sources":["../../src/rules/null.rule.ts"],"names":[],"mappings":";;;AAAA,iDAA6C;AAE7C,MAAa,QAAyB,SAAQ,0BAA2B;IACrE;QACI,KAAK,CAAC,CAAC,KAAa,EAAE,EAAE;YACpB,IAAI,KAAK,IAAI,IAAI;gBACb,OAAO,IAAI,CAAC;;gBAEZ,OAAO,oBAAoB,CAAC;QACpC,CAAC,CAAC,CAAC;IACP,CAAC;CACJ;AATD,4BASC"}

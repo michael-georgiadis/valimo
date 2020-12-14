@@ -1,3 +1,5 @@
+import { ValidatorResult } from "../validators/result.validator";
+
 export abstract class CoreRule<TModel> {
     protected _customErrorMessage?: string;
     protected _whenCondition?: (model: TModel) => boolean;
@@ -14,4 +16,6 @@ export abstract class CoreRule<TModel> {
     public set unlessCondition(condition: (model: TModel) => boolean) {
         this._unlessCondition = condition;
     }
+
+    public abstract validate(value: any, model: TModel): ValidatorResult
 }
