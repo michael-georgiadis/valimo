@@ -59,6 +59,15 @@ So in order to check the errors you'll have to do
         console.log(validationResult.errors);
     }
 ```
+And it will look like this
+```typescript
+[
+    {
+        property: "The property of the given object",
+        error: "Custom Message Here!"
+    }
+]
+```
 
 ## Cool Features!
 This library supports custom rules!  
