@@ -1,6 +1,6 @@
 # valify
 
-A validation library inspired by Fluent Validation of C# and fluentvalidation-ts of @AlexJPotter
+A validation library inspired by Fluent Validation of C# and fluentvalidation-ts of [@AlexJPotter]https://github.com/AlexJPotter
 
 # So what's different?
 
