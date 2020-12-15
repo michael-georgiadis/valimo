@@ -16,5 +16,8 @@
     "valify"
   ],
   "author": "Michael Georgiadis (Funnyman420)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express-validator": "^6.8.0"
+  }
 }
