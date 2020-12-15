@@ -5,7 +5,9 @@ A validation library inspired by Fluent Validation of C# and fluentvalidation-ts
 # So what's different?
 
 A lot of validation libraries out there, don't use the lambda functions to capture the property of the object that they're about to validate and pass it as strings.  
+  
 That to me is really bad productivity wise, because the (glorious) Typescript Compiler doesn't give you a hint, when for some reason you change the name of the function.  
+  
 Also, many of the libraries I've seen, do really complex stuff, that to my experience, I never had to use. The goal of this library was to make it lightweight, fast and easy to use.
 
 # How do I use it?
