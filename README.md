@@ -2,7 +2,7 @@
 
 A validation library inspired by [FluentValidation](https://github.com/FluentValidation/FluentValidation) of C# and [fluentvalidation-ts](https://github.com/AlexJPotter/fluentvalidation-ts) of [@AlexJPotter](https://github.com/AlexJPotter)
 
-# So what's different?
+## So what's different?
 
 A lot of validation libraries out there, don't use the lambda functions to capture the property of the object that they're about to validate and pass it as strings.  
   
@@ -10,7 +10,7 @@ That to me is really bad productivity wise, because the (glorious) Typescript Co
   
 Also, many of the libraries I've seen, do really complex stuff, that to my experience, I never had to use. The goal of this library was to make it lightweight, fast and easy to use.
 
-# How do I use it?
+## How do I use it?
 Simple! It works like any other validation library. For example: 
 ```typescript
 interface Person {
@@ -45,12 +45,40 @@ const result = personValidator.validate(person);
 
 The result is of type 
 ```typescript
-interface IValidationError {
-    property: string,
-    errors?: string[]
+interface IValidationResult {
+    success: boolean,
+    errors?: IValidationErrors[]
 }
 ```
-If it's an empty array then no errors were found. Otherwise, it will contain the property and the errors that surrounded that property.
+
+So in order to check the errors you'll have to do
+```typescript
+    const validationResult = personValidator.validate(person);
+
+    if (!validationResult.success) {
+        console.log(validationResult.errors);
+    }
+```
+
+## Cool Features!
+This library supports custom rules!  
+```typescript
+class PersonValidator extends AbstractValidator<Person> {
+    constructor() {
+        super();
+
+        this.ruleFor(x => x.age)
+            .customRule(45, (value, person) => {
+                if (age > 1000)
+                    return false;
+                
+                return true
+            })
+            .withMessage("You're too old for this");
+    }
+}
+```
+This would easily be done with some of the other rules, but it was a demonstration that you can write your own function for validation if you want and you can also add a custom message on top of it like any other rule!
 
 # Future plans?
 My plan for the future is to integrate my validators to be traslated to that of express-validator, so you can use a "type-safe" way to validate your objects,
