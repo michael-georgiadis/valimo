@@ -1,4 +1,4 @@
-# Valify
+# valify
 
 A validation library inspired by Fluent Validation of C# and fluentvalidation-ts of @AlexJPotter
 
