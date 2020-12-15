@@ -1,3 +1,4 @@
+import { CustomRule } from './rules/custom.rule';
 import { AbstractValidator } from "./abstract.validator";
 import { EmailRule } from "./rules/email.rule";
 import { EqualRule } from "./rules/equal.rule";
@@ -20,6 +21,13 @@ export class ValidatorGenerator<T> {
 
     constructor(public validator: AbstractValidator<T>, public propertyName: string) {
         this.validator.rules[propertyName] = [];
+    }
+
+    public customRule(value: any, func: (value: any, subject: T) => boolean) {
+        this.validator.rules[this.propertyName]
+            .push(new CustomRule(value, func));
+
+        return this;
     }
 
     public isEmail() {
@@ -88,7 +96,7 @@ export class ValidatorGenerator<T> {
     public isLessThan(value: number) {
         this.validator.rules[this.propertyName]
             .push(new LessThanRule(value));
-        
+
         return this;
     }
 
@@ -116,7 +124,7 @@ export class ValidatorGenerator<T> {
     public isNotEmpty() {
         this.validator.rules[this.propertyName]
             .push(new NotEmptyRule());
-        
+
         return this;
     }
 
@@ -142,7 +150,12 @@ export class ValidatorGenerator<T> {
     }
 
     public withMessage(message: string) {
-        if (this.validator.rules[this.propertyName].length > 1)
+        console.log(this.validator.rules);
+        console.log(this.propertyName);
+
+        console.log(this.validator.rules[this.propertyName].length);
+
+        if (this.validator.rules[this.propertyName].length > 0)
             this.validator.rules[this.propertyName][
                 this.validator.rules[this.propertyName].length - 1]
                 .customErrorMessage = message;
