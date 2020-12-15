@@ -16,6 +16,8 @@ import { MinLengthRule } from "./rules/min-length.rule";
 import { NotEmptyRule } from "./rules/not-empty.rule";
 import { NotEqualRule } from "./rules/not-equal.rule";
 import { NullRule } from "./rules/null.rule";
+import { ScalePrecisionRule } from './rules/scale-precision.rule';
+
 
 export class ValidatorGenerator<T> {
 
@@ -23,7 +25,7 @@ export class ValidatorGenerator<T> {
         this.validator.rules[propertyName] = [];
     }
 
-    public customRule(value: any, func: (value: any, subject: T) => boolean) {
+    public customRule(value: any, func: (funcValue: typeof value, subject: T) => boolean) {
         this.validator.rules[this.propertyName]
             .push(new CustomRule(value, func));
 
@@ -144,7 +146,7 @@ export class ValidatorGenerator<T> {
 
     public hasScalePrecisionOf(precision: number, scale: number) {
         this.validator.rules[this.propertyName]
-            .push(new NullRule());
+            .push(new ScalePrecisionRule(precision, scale));
 
         return this;
     }

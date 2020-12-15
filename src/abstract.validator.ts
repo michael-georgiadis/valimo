@@ -3,6 +3,7 @@ import { AbstractRule } from "./rules/abstract.rule";
 import { CoreRule } from "./rules/core.rule";
 import { ValidatorGenerator } from "./validator.generator";
 import { IValidationError } from "./errors/validation.error"
+import { IValidationResult } from './validation.result';
 
 
 export abstract class AbstractValidator<T> {
@@ -23,12 +24,10 @@ export abstract class AbstractValidator<T> {
         return new ValidatorGenerator<T>(this, propertyName);
     }
 
-    public validate(object: T) {
+    public validate(object: T): IValidationResult {
         const errors: IValidationError[] = []
 
         for (let propertyName in this.rules) {
-            const errorMessagesForRule: string[] = [];
-
             for (let rule of this.rules[propertyName]) {
 
                 const errorResult = rule instanceof CustomRule
@@ -37,18 +36,15 @@ export abstract class AbstractValidator<T> {
 
 
                 if (errorResult != null)
-                    errorMessagesForRule.push(errorResult);
+                    errors.push({
+                        property: propertyName,
+                        error: errorResult
+                    });
             }
-
-            if (errorMessagesForRule !== [])
-                errors.push({
-                    property: propertyName,
-                    errors: errorMessagesForRule
-                })
         }
 
         return errors.length > 0
-            ? errors
-            : null;
+            ? { success: false, errors: errors }
+            : { success: true }
     }
 }
