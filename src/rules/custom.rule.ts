@@ -8,7 +8,7 @@ export class CustomRule<TModel, TValue extends TModel> extends AbstractRule<TMod
 
             return func(value, subject)
                 ? null
-                : 'Custom rule not passed'
+                : 'Custom rule not successful'
         });
     }
 }
