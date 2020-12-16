@@ -1,4 +1,4 @@
-# valify
+# valimo
 
 A validation library inspired by [FluentValidation](https://github.com/FluentValidation/FluentValidation) of C# and [fluentvalidation-ts](https://github.com/AlexJPotter/fluentvalidation-ts) of [@AlexJPotter](https://github.com/AlexJPotter)
 
@@ -25,8 +25,7 @@ class PersonValidator extends AbstractValidator<Person> {
         this.ruleFor(x => x.name)
             .isNotEmpty() // Checks if the name is not empty
             .withMessage("NAMES! NAMES! GIVE ME NAMES") // A (little too dramatic) custom message
-            .hasMinLengthOf(4)
-            .withMessage("Custom messages for every rule!");
+            .hasMinLengthOf(4); // Or you can opt out and use the default ones instead
     }
 }
 ```

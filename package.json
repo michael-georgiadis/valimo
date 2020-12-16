@@ -1,5 +1,5 @@
 {
-  "name": "valify",
+  "name": "valimo",
   "version": "0.0.1",
   "description": "A fluent validation library, inspired by FluentValidation of .Net",
   "main": "dist/index.js",
