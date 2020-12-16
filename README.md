@@ -95,4 +95,4 @@ My plan for the future is to integrate my validators to be traslated to that of 
 without again relying on strings! Star it so you can find out!
 
 ## Special Thanks
-To Evangelina Nika that designed the logo!
+To [Evangelina Nika](https://www.linkedin.com/in/evangelina-nika-b4aa141ba/) that designed the logo!
