@@ -1,4 +1,6 @@
-# valimo
+<p>
+    <img width="460" height="300" src="./letter-logo.png">
+</p>
 
 A validation library inspired by [FluentValidation](https://github.com/FluentValidation/FluentValidation) of C# and [fluentvalidation-ts](https://github.com/AlexJPotter/fluentvalidation-ts) of [@AlexJPotter](https://github.com/AlexJPotter)
 
