@@ -79,7 +79,7 @@ class PersonValidator extends AbstractValidator<Person> {
 
         this.ruleFor(x => x.age)
             .customRule(45, (value, person) => {
-                if (age > 1000)
+                if (person.age > 1000)
                     return false;
                 
                 return true
