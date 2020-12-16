@@ -1,8 +1,8 @@
-A validation library inspired by [FluentValidation](https://github.com/FluentValidation/FluentValidation) of C# and [fluentvalidation-ts](https://github.com/AlexJPotter/fluentvalidation-ts) of [@AlexJPotter](https://github.com/AlexJPotter)
-
 <p align="center">
-    <img width="400" height="400" src="./letter-logo.png">
+    <img width="300" height="300" src="./letter-logo.png">
 </p>
+
+A validation library inspired by [FluentValidation](https://github.com/FluentValidation/FluentValidation) of C# and [fluentvalidation-ts](https://github.com/AlexJPotter/fluentvalidation-ts) of [@AlexJPotter](https://github.com/AlexJPotter)
 
 # So what's different?
 
